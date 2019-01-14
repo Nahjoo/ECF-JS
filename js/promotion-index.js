@@ -13,7 +13,7 @@ console.log(promotionID);
 var deletepro = document.querySelector("#deletepromo");
 deletepro.addEventListener('submit', deletepromotion);
 
-function deletepromotion(){
+function deletepromotion(event){
     event.preventDefault();
     fetch(API_URL + '/promotions/' + promotionID, {
         method: 'DELETE',
