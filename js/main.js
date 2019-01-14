@@ -1,5 +1,6 @@
 var API_URL = "http://api-students.popschool-lens.fr/api";
-
+var select = document.querySelector("#select1");
+var newnamepromo = document.querySelector(".newname");
 
 function getpromotions() {
     fetch(API_URL + '/promotions')
@@ -10,16 +11,28 @@ function getpromotions() {
 
             const list = document.querySelector(".list-container");
             list.innerHTML = '';
+            
 
             promotions.forEach(promot => {
                 console.log(promot.name);
                 const li = document.createElement("li");
                 const link = document.createElement("a");
+                var option = document.createElement("option");
+
+                
+                if(option.innerHTML != promot.name){
+                    select.appendChild(option);
+                    option.innerHTML = `${promot.id} ${promot.name}`;
+                }
+                
                 link.href = "promotion.html?id=" + promot.id;
                 link.textContent = promot.name;
                 li.appendChild(link)
                 list.appendChild(li);
+                
             });
+            
+            
             return promotions;
         })
     
@@ -52,11 +65,34 @@ function createPromotion(event) {
         })
 
         .then(function (response) {
+            
             getpromotions()
         })
         .catch(error => console.log(error));
 }
 
+
+var modif = document.querySelector("#newpromname");
+modif.addEventListener("submit", modifier);
+
+function modifier(event){
+    event.preventDefault();
+    fetch(API_URL + '/promotions/' + select.value , {
+        method: 'PUT',
+        headers: new Headers({
+            'content-type': 'application/json'
+        }),
+        body: JSON.stringify({
+            name: newnamepromo.value,
+        })
+    })
+
+    .then(function (response) {
+
+        getpromotions();
+    })
+    .catch(error => console.log(error));
+}
 
 
 

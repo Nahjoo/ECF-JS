@@ -1,8 +1,7 @@
-
 require: "main.js";
 
 var API_URL = "http://api-students.popschool-lens.fr/api";
-var API_URL2 = "http://api-students.popschool-lens.fr/";
+var API_URL1 = "/api/promotions/";
 
 
 const url = new URL(window.location.href);
@@ -10,65 +9,65 @@ const params = new URLSearchParams(url.search);
 const promotionID = params.get('id');
 console.log(promotionID);
 
+
+
 var deletepro = document.querySelector("#deletepromo");
 deletepro.addEventListener('submit', deletepromotion);
+var select = document.querySelector("#select");
+var deletestud = document.querySelector("#deletestudent");
+deletestud.addEventListener('submit', deletestudents);
 
-function deletepromotion(event){
-    event.preventDefault();
-    fetch(API_URL + '/promotions/' + promotionID, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-          }
-    })
-
-    .then(function (response) {
-        
-        console.log("promo sup");
-    })
-    .catch(error => console.log(error));
-}
 
 
 function getstudents() {
-    fetch(API_URL + '/promotions')
+    fetch(API_URL + '/students')
         .then(response => response.json())
-        .then(function (promo) {
-            const promotions = promo['hydra:member'];
-            console.log(promotions);
-
-            // const list = document.querySelector(".list-container");
-            // list.innerHTML = '';
-
-            promotions.forEach(promot => {
-                console.log(promot.id);
-                if(promotionID == promot.id){
-                    console.log()
+        .then(function (studentlist) {
+            const students = studentlist['hydra:member'];
+            console.log(students)
+            students.forEach(student => {
+                if (student.promotion == API_URL1 + promotionID) {
+                    console.log(student.lastname);
+                    var option = document.createElement("option");
+                    select.appendChild(option);
+                    option.innerHTML = `${student.id} ${student.firstname} ${student.lastname}`
                 }
-                
-                
             });
-           
+        });
+}
+
+
+function deletepromotion(event) {
+    event.preventDefault();
+    fetch(API_URL + '/promotions/' + promotionID, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
 
+        .then(function (response) {
 
-    // fetch(API_URL2 +  )
-    // .then(response => response.json())
-    // .then(function (promo) {
-        
-    //     console.log(promotions);
+            console.log("promo sup");
+        })
+        .catch(error => console.log(error));
+}
 
-    //     // const list = document.querySelector(".list-container");
-    //     // list.innerHTML = '';
 
-    //     promotions.forEach(promot => {
-            
-            
-    //     });
-        
-    // })
-    
-    
+function deletestudents(event) {
+    event.preventDefault();
+    fetch(API_URL + '/students/' + select.value, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        .then(function (response) {
+
+            console.log("student supp");
+        })
+        .catch(error => console.log(error));
 }
 
 getstudents();
