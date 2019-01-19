@@ -20,8 +20,9 @@ function getpromotions() {
                 var option = document.createElement("option");
 
                 
-                if(option.innerHTML != promot.name){
+                if(select.innerHTML != promot.name){
                     select.appendChild(option);
+
                     option.innerHTML = `${promot.id} ${promot.name}`;
                 }
                 
@@ -43,7 +44,7 @@ var createpromo = document.querySelector("#create-new-promotion");
 createpromo.addEventListener('submit', createPromotion);
 
 function createPromotion(event) {
-    event.preventDefault();
+    event.preventDefault(event);
     const nameInput = document.querySelector("#new-promotion-name");
     const startInput = document.querySelector("#new-promotion-startdate")
     const endInput = document.querySelector("#new-promotion-endDate")
@@ -76,7 +77,7 @@ var modif = document.querySelector("#newpromname");
 modif.addEventListener("submit", modifier);
 
 function modifier(event){
-    event.preventDefault();
+    event.preventDefault(event);
     fetch(API_URL + '/promotions/' + select.value , {
         method: 'PUT',
         headers: new Headers({

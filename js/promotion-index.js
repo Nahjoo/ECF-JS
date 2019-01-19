@@ -38,7 +38,7 @@ function getstudents() {
 
 
 function deletepromotion(event) {
-    event.preventDefault();
+    event.preventDefault(event);
     fetch(API_URL + '/promotions/' + promotionID, {
             method: 'DELETE',
             headers: {
@@ -47,7 +47,7 @@ function deletepromotion(event) {
         })
 
         .then(function (response) {
-
+            getstudents();
             console.log("promo sup");
         })
         .catch(error => console.log(error));
@@ -55,7 +55,7 @@ function deletepromotion(event) {
 
 
 function deletestudents(event) {
-    event.preventDefault();
+    event.preventDefault(event);
     fetch(API_URL + '/students/' + select.value, {
             method: 'DELETE',
             headers: {
@@ -64,10 +64,47 @@ function deletestudents(event) {
         })
 
         .then(function (response) {
-
+            getstudents();
             console.log("student supp");
         })
         .catch(error => console.log(error));
 }
+
+
+
+var createstudent = document.querySelector("#poststudent");
+createstudent.addEventListener('submit', poststudent);
+
+function poststudent(event) {
+    event.preventDefault(event);
+    const firstnameInput = document.querySelector("#new-firstname-stud");
+    const lastnameInput = document.querySelector("#new-lastname-stud")
+    const birthdateInput = document.querySelector("#birthdate-stud")
+    const sexeInput = document.querySelector("#sexe-stud")
+    
+
+    fetch(API_URL + '/students', {
+            method: 'POST',
+            headers: new Headers({
+                'content-type': 'application/json'
+            }),
+            body: JSON.stringify({
+
+                firstname: firstnameInput.value,
+                lastname: lastnameInput.value,
+                birthdate: birthdateInput.value,
+                sexe: sexeInput.value,
+                promotion: API_URL1 + promotionID,
+
+            })
+        })
+
+        .then(function (response) {
+            getstudents();
+            
+        })
+        .catch(error => console.log(error));
+}
+
 
 getstudents();
