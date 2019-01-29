@@ -9,7 +9,7 @@
 * supprimer des étudiants
 
 
-# Modification à pévoir
+# Modification à prévoir
 
 * La mise en page
 * Modifier la création de student
