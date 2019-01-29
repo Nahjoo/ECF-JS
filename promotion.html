@@ -11,27 +11,46 @@
 <body>
     <h1>Détails Promotion</h1>
 
-    <h2>Les Etudients de la Promotion</h2>
+    <h2>Les Etudiants de la Promotion</h2>
+    <div>
+        <ul id="list">
+        </ul>
+    </div>
 
     <select id="select">
-        
     </select>
+
+<!-- button delete student -->
     <form id="deletestudent"> 
         <input type="submit" value="supprimer student" >
     </form>
+<!-- --------------------- -->
 
-
+<!-- button delete promotion -->
     <form id="deletepromo"> 
         <input type="submit" value="supprimer la promotion" >
     </form>
+<!-- ----------------------- -->
+
+
+<!-- formulaire create new student  -->
 
     <form id="poststudent">
-        <input type="text" id="new-firstname-stud" value="firstname student">
-        <input type="text" id="new-lastname-stud" value="lastname student">
-        <input type="date" id="birthdate-stud" value="birthdate student">
-        <input type="text" id="sexe-stud" value="sexe student">
-        <input type="submit" value="ajouter un étudiant" >
+        <input type="text" id="new-firstname-stud" placeholder="firstname student">
+        <input type="text" id="new-lastname-stud" placeholder="lastname student">
+        <input type="date" id="birthdate-stud" placeholder="birthdate student">
+        <input type="text" id="sexe-stud" placeholder="sexe student">
+        <input type="submit" value="ajouter etudiant">
     </form>
+<!-- ------------------------------ -->
+
+<!-- formulaire modify student -->
+    <form id="modifyStud">
+        <input id="new-lastname-student" type="text" placeholder="modifer nom de l'étudiant">
+        <input id="new-firstname-student" type="text" placeholder="modifer prenom  de l'étudiant">
+        <input type="submit" value="modifier">
+    </form>
+<!-- ------------------------- -->
 
 </body>
 </html>
