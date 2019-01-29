@@ -7,3 +7,9 @@
 * modifier la liste des étudiants contenus dans les promotions
 * ajouter des étudiants
 * supprimer des étudiants
+
+
+# Modification à pévoir
+
+* La mise en page
+* Modifier la création de student
